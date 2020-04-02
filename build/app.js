@@ -11,6 +11,11 @@ app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
 app.use(_bodyParser["default"].json());
+app.get('/', function (erq, res) {
+  res.send({
+    message: 'welcome to Todo FullStack'
+  });
+});
 var port = process.env.PORT || 5000;
 app.listen(port, function () {
   return console.log("server is ready at http://localhost:".concat(port));
