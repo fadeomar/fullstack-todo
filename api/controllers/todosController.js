@@ -27,6 +27,23 @@ const todos = {
       return next(new Error(e));
     }
   },
+  async fetchOne({ params, decoded }, res, next) {
+    try {
+      const myTodo = await Todo.findOne({
+        where: { id: params.todoId, userId: decoded.userId },
+        include: [{
+          model: TodoItem,
+          as: 'todoItems'
+        }],
+      });
+      if (!myTodo) {
+        return res.status(404).send({ error: 'Todo not found' });
+      }
+      return res.status(200).send(myTodo);
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
 };
 
 export default todos;
