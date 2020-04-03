@@ -151,4 +151,12 @@ each todoItem belongs to one todo :
 6- create get one todoItem : 
   * destructure the todoItemId from the req.params;
   * use `fineOne` method from TodoItem model and `where` by id `include` model Todo, as 'todo';
-  
+
+7- create update todoItem : 
+  * destructure the text and isCompleted from the req.body;
+  * destructure the todoItemId from the req.params;
+  * use `fineOne` method from TodoItem model and `where` by id;
+  * use `update` method from TodoItem model and pass the data with `where` by id;
+  * 
+
+

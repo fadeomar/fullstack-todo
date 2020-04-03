@@ -49,6 +49,32 @@ const todoItems = {
       return next(new Error(e));
     }
   },
+
+  async update(req, res, next) {
+    try {
+      const { text, isCompleted } = req.body;
+      const { todoItemId } = req.params;
+      // Validation
+      if (!todoItemId) { return res.status(400).send({ error: 'todoItemId is required' }); }
+      const item = await TodoItem.findOne({
+        where: { id: todoItemId },
+      });
+      if (!item) {
+        return res.status(404).send({ error: 'Item does not exist' });
+      }
+      const updatedItem = await TodoItem.update(
+        { text: text || item.text, isCompleted },
+        {
+          where: { id: req.params.todoItemId },
+          returning: true,
+          plain: true,
+        }
+      );
+      return res.status(200).send(updatedItem[1]);
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
 };
 
 export default todoItems;
