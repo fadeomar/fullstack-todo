@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable */
 
 var _express = _interopRequireDefault(require("express"));
 
