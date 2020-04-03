@@ -44,6 +44,24 @@ const todos = {
       return next(new Error(e));
     }
   },
+
+  async update({ body, decoded, params }, res, next) {
+    try {
+      const todo = await Todo.findOne({ where: { id: params.todoId, userId: decoded.userId } });
+      if (!todo) {
+        return res.status(400).send({ error: 'Wrong todo id' });
+      }
+      const updatedTodo = await Todo.update({ title: body.title || todo.title },
+        {
+          where: { id: todo.id },
+          returning: true,
+          plain: true
+        },);
+      return res.status(200).send(updatedTodo[1]);
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
 };
 
 export default todos;
