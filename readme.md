@@ -131,3 +131,7 @@ each todoItem belongs to one todo :
 6- create delete todo route : 
   * after finding it ;
   * use `destroy` method on the todo that rreturned from `findOne`;
+
+## 6 : CRUD operations for To Do item:
+
+  1- create a script to migrate the database when making change in the megration files.
