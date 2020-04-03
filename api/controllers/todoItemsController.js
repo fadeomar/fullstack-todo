@@ -32,6 +32,23 @@ const todoItems = {
       return next(new Error(e));
     }
   },
+  async fetchOne(req, res, next) {
+    try {
+      const { todoItemId } = req.params;
+      // Validation
+      if (!todoItemId) { return res.status(400).send({ error: 'todoItemId is required' }); }
+      const items = await TodoItem.findOne({
+        where: { id: todoItemId },
+        include: [{
+          model: Todo,
+          as: 'todo'
+        }],
+      });
+      return res.status(200).send(items);
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
 };
 
 export default todoItems;

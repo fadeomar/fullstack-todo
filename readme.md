@@ -148,3 +148,7 @@ each todoItem belongs to one todo :
   * destructure the todoId from the req.body;
   * use `findAll` method with `where` key to pass condetion (by id) and `include`;
   
+6- create get one todoItem : 
+  * destructure the todoItemId from the req.params;
+  * use `fineOne` method from TodoItem model and `where` by id `include` model Todo, as 'todo';
+  
