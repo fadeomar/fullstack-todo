@@ -62,6 +62,18 @@ const todos = {
       return next(new Error(e));
     }
   },
+  async delete({ params, decoded }, res, next) {
+    try {
+      const todo = await Todo.findOne({ where: { id: params.todoId, userId: decoded.userId } });
+      if (!todo) {
+        return res.status(400).send({ error: 'Wrong todo id' });
+      }
+      await todo.destroy();
+      return res.status(200).send({});
+    } catch (e) {
+      return next(new Error(e));
+    }
+  }
 };
 
 export default todos;
