@@ -46,3 +46,8 @@
 4- create route folder in the app and inside of it create index for routes 
   * import the signup route and using the app with method post;
   * import the route in the app file ind using with app as parameter;
+
+5- to ensure that each user sign within a single email and for validate the data
+  * create middleware to check that and add it to signup route;
+
+6- create sign in route;
