@@ -1,7 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { config } from 'dotenv';
 
-const jwtToken = {
+config();
+
+export const jwtToken = {
   createToken({ id, email }) {
     return jwt.sign(
       { id, email },
@@ -14,3 +17,6 @@ const jwtToken = {
     return decoded;
   }
 };
+
+export const hashPassword = (password) => bcrypt.hashSync(password, 10);
+export const comparePassword = (password, hash) => bcrypt.compareSync(password, hash);
