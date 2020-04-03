@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { TodoItem } = models;
+const { TodoItem, Todo } = models;
 
 const todoItems = {
   async create(req, res, next) {
@@ -11,6 +11,23 @@ const todoItems = {
       if (!todoId) { return res.status(400).send({ error: 'todoId is required' }); }
       const item = await TodoItem.create({ text, todoId });
       return res.status(201).send(item);
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
+  async fetchAll(req, res, next) {
+    try {
+      const { todoId } = req.params;
+      // Validation
+      if (!todoId) { return res.status(400).send({ error: 'todoId is required' }); }
+      const items = await TodoItem.findAll({
+        where: { todoId },
+        include: [{
+          model: Todo,
+          as: 'todo'
+        }],
+      });
+      return res.status(200).send(items);
     } catch (e) {
       return next(new Error(e));
     }

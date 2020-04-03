@@ -144,4 +144,7 @@ each todoItem belongs to one todo :
   * use `create` method from todoItem model to create todoItem;
   * use try and catch in case of errors;
 
-5- 
+5- create get all todoItem :
+  * destructure the todoId from the req.body;
+  * use `findAll` method with `where` key to pass condetion (by id) and `include`;
+  
