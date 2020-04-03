@@ -98,3 +98,36 @@ each todoItem belongs to one todo :
 
 4- add to the megration files in reference for the id's ;
 5- `sequelize db:migrate`;
+
+
+## 5- CRUD operations for To Do List:
+
+1- create middleware to authorize the user : 
+  * check the req header contain authorization.
+  * if so, it'll be like "Bearer token"
+  * spilt the text to get the token text 
+  * decoded the token using jwt and the secret 
+  * add decoded to the req as req.decoded 
+  * check if the user exist by using findByPk method form the user model and return the result; 
+
+2- create post todo route :
+  * all routes take req, res, next ;
+  * destructure the body and decoded from the req; (also the title from the body)
+  * use `create` method from Todo model to post new todo and pass to it object contain title and user id.
+  * return the res with status 201 if there is no error and send the new todo;
+  * use try and catch in case of errors;
+
+3- create get todo's route : 
+  * we want to get all todo' for the user and its items so we will use `findAll` method from todo modle and take an object with `where` key to add condetion and key `include` to get data from another table;
+  * the same steps to identify the user;
+
+4- create get one todo route : 
+  * using `findOne` with `where` to get a spacific todo and we need to pass the id as params and receive it from the req;
+
+5- create updata todo route : 
+  * we need the id from params and we need to find it by the id so we will use `findByPk` method from Todo model
+  * then if its exist we can use `update` method from todo model and pass it object with all key to ubdate and onther key as `where` to add conditon for the one that updata (by id);
+
+6- create delete todo route : 
+  * after finding it ;
+  * use `destroy` method on the todo that rreturned from `findOne`;
