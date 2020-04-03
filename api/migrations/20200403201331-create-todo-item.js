@@ -8,7 +8,8 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     text: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     todoId: {
       type: Sequelize.INTEGER,
@@ -19,7 +20,8 @@ module.exports = {
       }
     },
     isCompleted: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
     createdAt: {
       allowNull: false,

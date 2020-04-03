@@ -130,4 +130,37 @@ each todoItem belongs to one todo :
 
 6- create delete todo route : 
   * after finding it ;
+  * use `destroy` method on the todo that returned from `findOne`;
+
+## 6 : CRUD operations for To Do item:
+
+1- create a script to migrate the database when making change in the megration files.
+(this command will lose all the data in the DB)
+2- edit the todo-item megration file : isCompleted with default value false and the text cant be null;
+3- create todoItemController for the todo item routes;
+4- create post todo item route : 
+  * destructure the text and the todoId from the req.body;
+  * validate the text and todoId and if err, send it;
+  * use `create` method from todoItem model to create todoItem;
+  * use try and catch in case of errors;
+
+5- create get all todoItem :
+  * destructure the todoId from the req.body;
+  * use `findAll` method with `where` key to pass condetion (by id) and `include`;
+  
+6- create get one todoItem : 
+  * destructure the todoItemId from the req.params;
+  * use `fineOne` method from TodoItem model and `where` by id `include` model Todo, as 'todo';
+
+7- create update todoItem : 
+  * destructure the text and isCompleted from the req.body;
+  * destructure the todoItemId from the req.params;
+  * use `fineOne` method from TodoItem model and `where` by id;
+  * use `update` method from TodoItem model and pass the data with `where` by id;
+  
+8- create delete todoItem :
+  * destructure the todoItemId from the req.params;
   * use `destroy` method on the todo that rreturned from `findOne`;
+
+
+
