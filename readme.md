@@ -98,3 +98,14 @@ each todoItem belongs to one todo :
 
 4- add to the megration files in reference for the id's ;
 5- `sequelize db:migrate`;
+
+
+## 5- CRUD operations for To Do List:
+
+1- create middleware to authorize the user : 
+  * check the req header contain authorization.
+  * if so, it'll be like "Bearer token"
+  * spilt the text to get the token text 
+  * decoded the token using jwt and the secret 
+  * add decoded to the req as req.decoded 
+  * check if the user exist by using findByPk method form the user model and return the result; 
