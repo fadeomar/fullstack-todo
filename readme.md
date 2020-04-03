@@ -134,4 +134,14 @@ each todoItem belongs to one todo :
 
 ## 6 : CRUD operations for To Do item:
 
-  1- create a script to migrate the database when making change in the megration files.
+1- create a script to migrate the database when making change in the megration files.
+(this command will lose all the data in the DB)
+2- edit the todo-item megration file : isCompleted with default value false and the text cant be null;
+3- create todoItemController for the todo item routes;
+4- create post todo item route : 
+  * destructure the text and the todoId from the req.body;
+  * validate the text and todoId and if err, send it;
+  * use `create` method from todoItem model to create todoItem;
+  * use try and catch in case of errors;
+
+5- 
