@@ -75,6 +75,23 @@ const todoItems = {
       return next(new Error(e));
     }
   },
+  async delete(req, res, next) {
+    try {
+      const { todoItemId } = req.params;
+      // Validation
+      if (!todoItemId) { return res.status(400).send({ error: 'todoItemId is required' }); }
+      const item = await TodoItem.findOne({
+        where: { id: todoItemId },
+      });
+      if (!item) {
+        return res.status(404).send({ error: 'Item does not exist' });
+      }
+      await item.destroy();
+      return res.status(200).send({});
+    } catch (e) {
+      return next(new Error(e));
+    }
+  }
 };
 
 export default todoItems;

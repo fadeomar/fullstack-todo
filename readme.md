@@ -130,7 +130,7 @@ each todoItem belongs to one todo :
 
 6- create delete todo route : 
   * after finding it ;
-  * use `destroy` method on the todo that rreturned from `findOne`;
+  * use `destroy` method on the todo that returned from `findOne`;
 
 ## 6 : CRUD operations for To Do item:
 
@@ -157,6 +157,10 @@ each todoItem belongs to one todo :
   * destructure the todoItemId from the req.params;
   * use `fineOne` method from TodoItem model and `where` by id;
   * use `update` method from TodoItem model and pass the data with `where` by id;
-  * 
+  
+8- create delete todoItem :
+  * destructure the todoItemId from the req.params;
+  * use `destroy` method on the todo that rreturned from `findOne`;
+
 
 
