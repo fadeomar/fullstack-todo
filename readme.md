@@ -24,7 +24,7 @@
   
     `sequelize db:migrate`
 
-## 3- User Authentication with JWT. Sign up and Sign In 2020:
+## 3- User Authentication with JWT. Sign up and Sign In:
 1- fix eslint errors in models folder (user , index) that generate from sequelize .
 2- create utils folder and index inside of it and create (and install JWT & bcrypt)
    *before create the function we need to add secret in env file to hash things*
@@ -51,3 +51,50 @@
   * create middleware to check that and add it to signup route;
 
 6- create sign in route;
+
+
+## 4- Create Sequelize Migrations & Associations:
+
+1- create table for todo's : 
+`sequelize model:generate --name Todo --attributes title:string,userId:integer`;
+
+2- create table for todo items : 
+`sequelize model:generate --name TodoItem --attributes text:string,todoId:integer,isCompleted:boolean`;
+
+3- add associations for each model:
+  - for user model : 
+    each user has many todos : 
+  ```
+    User.hasMany(models.Todo, {
+      as: 'todos',
+      foreignKey: 'userId',
+    });
+  };
+  ```
+
+  - for todo modle: 
+  each todo belongs to one user and has many todoItems :
+
+```
+Todo.belongsTo(models.User, {
+    as: 'user',
+    foreignKey: 'userId'
+  });
+  Todo.hasMany(models.TodoItem, {
+    as: 'todoItems',
+    foreignKey: 'todoId'
+  });
+};
+
+```
+- for todoItem : 
+each todoItem belongs to one todo :
+```
+  TodoItem.belongsTo(models.Todo, {
+    as: 'todo',
+    foreignKey: 'todoId'
+  });
+```
+
+4- add to the megration files in reference for the id's ;
+5- `sequelize db:migrate`;
