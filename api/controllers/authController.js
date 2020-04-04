@@ -49,6 +49,7 @@ const auth = {
         return res.status(404).send({ error: 'User not found' });
       }
       const token = jwtToken.createToken(user);
+      // const link = `${req.protocol}://${req.host}:5000/reset_password/${token}`;
       const link = `${req.protocol}://localhost:5000/reset_password/${token}`;
       await sendEmail(
         email,
