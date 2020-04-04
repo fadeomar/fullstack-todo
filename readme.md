@@ -164,3 +164,13 @@ each todoItem belongs to one todo :
 
 
 
+## 7 : Password Reset using SendGrid :
+  1- create an account in sendgrid.com website;
+  2- generate API key in integration guide and add the key in env file;
+  3- install sandgrid module `npm install --save @sendgrid/mail`;
+  4- create utile function to handle email sending;
+  5- create route to handle sending emails;
+  6- create route to handle rest password;
+
+# 8: Mockups for the front-end: 
+link : https://www.figma.com/file/xe3FDUgWhqHcaiqTU298lM/Best-To-Do?node-id=0%3A1
