@@ -65,6 +65,26 @@ const auth = {
       return next(new Error(e));
     }
   },
+  resetPassword: async (req, res, next) => {
+    try {
+      const { password } = req.body;
+      const { token } = req.params;
+      const decoded = jwtToken.verifyToken(token);
+      const hash = hashPassword(password);
+      const updatedUser = await User.update(
+        { password: hash },
+        {
+          where: { id: decoded.userId },
+          returning: true,
+          plain: true,
+        }
+      );
+      const { id, name, email } = updatedUser[1];
+      return res.status(200).send({ token, user: { id, name, email } });
+    } catch (e) {
+      return next(new Error(e));
+    }
+  }
 };
 
 export default auth;
