@@ -170,3 +170,4 @@ each todoItem belongs to one todo :
   3- install sandgrid module `npm install --save @sendgrid/mail`;
   4- create utile function to handle email sending;
   5- create route to handle sending emails;
+  6- create route to handle rest password;
