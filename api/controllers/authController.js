@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import regeneratorRuntime from 'regenerator-runtime';
+import validator from 'validator';
+import sendEmail from '../utils/sendEmail';
 import models from '../models';
 
 import { hashPassword, jwtToken, comparePassword } from '../utils';
@@ -7,7 +9,7 @@ import { hashPassword, jwtToken, comparePassword } from '../utils';
 const { User } = models;
 
 const auth = {
-  async signUp(req, res, next) {
+  signUp: async (req, res, next) => {
     try {
       const { name, email, password } = req.body;
       const hash = hashPassword(password);
@@ -19,7 +21,7 @@ const auth = {
       return next(new Error(e));
     }
   },
-  async signIn(req, res, next) {
+  signIn: async (req, res, next) => {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
@@ -32,7 +34,36 @@ const auth = {
     } catch (e) {
       return next(new Error(e));
     }
-  }
+  },
+  sendResetLink: async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ where: { email } });
+      if (!email) {
+        return res.status(400).send({ error: 'Email is required' });
+      }
+      if (!validator.isEmail(email)) {
+        return res.status(400).send({ error: 'Invalid email' });
+      }
+      if (!user) {
+        return res.status(404).send({ error: 'User not found' });
+      }
+      const token = jwtToken.createToken(user);
+      const link = `${req.protocol}://localhost:5000/reset_password/${token}`;
+      await sendEmail(
+        email,
+        'noreply@todo.com',
+        'Best To Do password reset',
+        `
+        <div>Click the link below to reset your password</div><br/>
+        <div>${link}</div>
+        `
+      );
+      return res.status(200).send({ message: 'Password reset link has been successfully sent to your inbox' });
+    } catch (e) {
+      return next(new Error(e));
+    }
+  },
 };
 
 export default auth;
