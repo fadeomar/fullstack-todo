@@ -6,6 +6,15 @@ export const Nav = styled.nav`
   height: 60px;
   color: #fff;
   background-color: #06A82A;
+  .row {
+    display: flex;
+    .col-md-5 {
+      width: 70%;
+    };
+    .col-md-7 {
+      width: 28%;
+    }
+  };
   .logo {
     font-family: Lora;
     font-style: italic;
@@ -18,14 +27,17 @@ export const Nav = styled.nav`
     }
   }
   .auth-btns {
-    width: 100%;
     .btn {
       float: right;
       color: #fff;
       font-weight: 600;
+      cursor: pointer;
     }
     .sign-in {
       line-height: 45px;
+      background: transparent;
+      border : none;
+      padding: 5px 10px;
     }
     .sign-up {
       height: 30px;
