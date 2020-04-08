@@ -6,6 +6,7 @@ export const initialState = {
   user: null,
   isAuthenticated: false,
   signUpErr: null,
+  signInErr: null,
 };
 
 export const { Context, Provider } = createDataContext(
