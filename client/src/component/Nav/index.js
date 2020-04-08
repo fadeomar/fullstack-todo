@@ -6,19 +6,6 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = (props) => {
 
-  const handleSignUp = async () => {
-    await props.signUp({
-      name: 'client',
-      email: 'client@gmail.com',
-      password: '123456'
-    });
-  }
-  const handleSignIn = async () => {
-    await props.signIn({
-      email: 'client@gmail.com',
-      password: '123456'
-    });
-  }
 
   return (
     <Nav>
@@ -30,9 +17,10 @@ const NavBar = (props) => {
           <div className="auth-btns col-md-7">
             <NavLink to="/signup" >
             <button className="btn sign-up">Sign Up</button>
-
             </NavLink>
+            <NavLink to="/signin" >
             <button className="btn sign-in">Sign In</button>
+            </NavLink>
           </div>
         </div>
       </div>
