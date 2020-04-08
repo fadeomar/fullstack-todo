@@ -7,7 +7,7 @@
       dispatch({ type: 'SIGNUP_USER_SUCCESS', payload: res.data });
       return res;
     } catch (err) {
-      return dispatch({ type: 'SIGNUP_USER_ERROR', payload: err.response.data });
+      return dispatch({ type: 'SIGNUP_USER_FAILURE', payload: err.response.data });
     }
   }
 
