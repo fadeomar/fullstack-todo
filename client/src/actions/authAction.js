@@ -11,7 +11,13 @@
     }
   }
 
-  export const signIn = (user) => async dispatch => {
-    const result = await apiCall('/auth/sign_in', 'post', user);
-    return dispatch({type: 'SIGNIN_USER', payload: result.data.user})
+  export const signIn = (dispatch) => async (user) => {
+    try {
+      dispatch({ type: 'SIGNIN_USER_LOADING' });
+      const res = await apiCall('/auth/sign_in', 'post', user);
+      dispatch({ type: 'SIGNIN_USER_SUCCESS', payload: res.data });
+      return res;
+    } catch (err) {
+      return dispatch({ type: 'SIGNIN_USER_FAILURE', payload: err.response.data })
+    }
   }
