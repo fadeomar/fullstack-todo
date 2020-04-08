@@ -24,6 +24,27 @@ const SignUp = () => {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
     const name = e.target.name;
+    // validations
+    switch (name) {
+      case 'name':
+        setname(user.name);
+        user.name.length < 3 ? setnameErr('Name must be at least 3 characters!') : setnameErr('');
+        break;
+      case 'email':
+        setemail(user.email);
+        !emailRegEx.test(user.email) ? setemailErr('Invalid Email!') : setemailErr('');
+        break;
+      case 'password':
+        setpassword(user.password);
+        user.password.length < 8 ? setpasswordErr('Password must be at least 8 characters!') : setpasswordErr('');
+        break;
+      case 'confPassword':
+        setconfPassword(user.confPassword);
+        user.confPassword !== password ? setconfPasswordErr('Passwords do not match!') : setconfPasswordErr('');
+        break;
+      default:
+        break;
+    }
 
 
   };
