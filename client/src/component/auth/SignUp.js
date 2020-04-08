@@ -5,7 +5,7 @@ import Layout from '../Layout/Layout';
 import { AuthFormWrapper } from './Styles';
 import { Context } from '../../context/authContext';
 
-const SignUp = () => {
+const SignUp = ({ signUp }) => {
   const { state } = useContext(Context);
   const [name, setname] = useState('');
   const [email, setemail] = useState('');
@@ -19,6 +19,7 @@ const SignUp = () => {
     e.preventDefault();
     if (name && email && password && confPassword && !nameErr && !emailErr && !passwordErr && !confPasswordErr) {
       await signUp({ name, email, password });
+      console.log('vvvv', state)
     }
   }
   const handleChange = (e) => {
