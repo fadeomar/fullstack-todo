@@ -1,8 +1,6 @@
 import React from 'react';
 import { Nav } from './Styles';
-import { signUp, signIn } from '../../actions';
-import { connect } from 'react-redux';
-import axios from 'axios';
+
 
 
 const NavBar = (props) => {
@@ -38,9 +36,5 @@ const NavBar = (props) => {
   )
 };
 
-const mapStateToProps = ({ authReducer }) => {
-  console.log(authReducer)
-  return {...authReducer}
-};
 
-export default connect(mapStateToProps, { signUp, signIn })(NavBar);
+export default NavBar;

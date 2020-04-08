@@ -1,14 +1,21 @@
-import React from 'react';
-import NavBar from '../component/Nav';
+import React, { useContext } from 'react';
 import Landing from '../component/Landing';
+import { Provider, Context } from '../context/authContext';
 
 function App() {
+  const all = useContext(Context)
+  console.log(all)
   return (
     <div className="App">
-      <NavBar />
       <Landing />
     </div>
   );
 }
 
-export default App;
+export default () => {
+  return (
+    <Provider >
+      <App />
+    </Provider>
+  )
+};
