@@ -10,6 +10,10 @@ const authReducer = (state = initialState , action) => {
       return {...state, user: action.payload, isAuthenticated: true};
     case 'SIGNIN_USER_FAILURE':
       return { ...state, signInErr: action.payload.error };
+    case 'SET_CURRENT_USER_SUCCESS':
+      return {...state, user: action.payload, isAuthenticated: true};
+    case 'SET_CURRENT_USER_FAILURE':
+      return { ...state, setUserErr: action.payload.error };
     default:
       return state;
   };
