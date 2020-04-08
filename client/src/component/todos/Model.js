@@ -1,7 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import Cookies from 'js-cookie';
+import { Context as TodosContext, Provider as TodosProvider } from '../../context/todoContext';
 import { ModalWrapper } from './Styles';
 
-const TodoModal = ({ closeModal }) => {
+const TodoModal = (props) => {
+  const { createTodo } = useContext(TodosContext);
+  const [todo, setTodo] = useState('');
+
   let myRef;
   useEffect(() => {
     document.addEventListener('click', closeTodoModal);
@@ -12,9 +17,23 @@ const TodoModal = ({ closeModal }) => {
 
   const closeTodoModal = (e) => {
     if (myRef && !myRef.contains(e.target)) {
-      closeModal();
+      props.closeModal();
     }
   }
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setTodo(e.target.value);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(todo)
+    if (todo) {
+      await createTodo({ title: todo }, Cookies);
+      props.closeModal();
+    }	    
+  }  
 
   return (
     <ModalWrapper>
@@ -26,10 +45,12 @@ const TodoModal = ({ closeModal }) => {
             name="todo"
             className="form-control"
             placeholder="Enter new Todo"
+            onChange={handleChange}
           />      
         </div>
         <button
           className="btn btn-primary float-right"
+          onClick={handleSubmit}
         >
           Save
         </button>

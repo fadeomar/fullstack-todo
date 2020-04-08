@@ -3,7 +3,7 @@ import apiCall from '../apiCall';
 export const createTodo = (dispatch) => async (todo, Cookies) => {
   try {
     dispatch({ type: 'CREATE_TODO_LOADING'})
-    const res = await apiCall('/todos', 'post', Cookies.get('token'));
+    const res = await apiCall('/todos', 'post', todo, Cookies.get('token'));
     if(res){
       dispatch({type: 'CREATE_TODO_SUCCESS', payload: res.data})
     }
