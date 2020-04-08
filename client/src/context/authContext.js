@@ -1,16 +1,17 @@
 import createDataContext from './createDataContext';
 import authReducer from '../reducers/auth';
-import { signUp, signIn } from '../actions';
+import { signUp, signIn, setCurrentUser } from '../actions';
 
 export const initialState = {
   user: null,
   isAuthenticated: false,
   signUpErr: null,
   signInErr: null,
+  setUserErr: null,
 };
 
 export const { Context, Provider } = createDataContext(
   authReducer,
-  { signUp, signIn },
+  { signUp, signIn, setCurrentUser },
   initialState,
 )
